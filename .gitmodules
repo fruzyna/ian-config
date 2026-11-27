@@ -1,0 +1,6 @@
+[submodule "config/reverse-proxy/pages/homepage"]
+	path = config/reverse-proxy/pages/homepage
+	url = https://github.com/fruzyna/homepage
+[submodule "config/reverse-proxy/pages/otd-calcs-web"]
+	path = config/reverse-proxy/pages/otd-calcs-web
+	url = https://github.com/fruzyna/otd-calcs-web

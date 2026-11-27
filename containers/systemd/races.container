@@ -1,0 +1,18 @@
+[Unit]
+Description=Any Races Server
+
+[Container]
+ContainerName=%N
+Image=ghcr.io/fruzyna/races
+AutoUpdate=registry
+HealthCmd=curl http://127.0.0.1:8000
+
+PublishPort=8002:8000
+
+Volume=%h/config/%N:/app/config:Z
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

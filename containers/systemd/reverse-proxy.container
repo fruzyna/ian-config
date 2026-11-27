@@ -1,0 +1,33 @@
+[Unit]
+Description=Reverse Proxy and Let's Encrypt
+
+[Container]
+ContainerName=%N
+Image=ghcr.io/linuxserver/swag
+AutoUpdate=registry
+HealthCmd=curl https://127.0.0.1:443
+
+# force container entrypoint to run as normal user
+UserNS=keep-id:uid=1000,gid=1000
+# let s6-overlay start the container as root for it can chown /config
+User=0:0
+
+EnvironmentFile=%h/secrets/lets-encrypt.env
+Environment=PUID=1000
+Environment=PGID=1000
+Environment=TZ=America/Chicago
+Environment=VALIDATION=dns
+Environment=DNSPLUGIN=cloudflare
+Environment=URL=fruzyna.net
+Environment=SUBDOMAINS=home,homepage,liam,metra,otd,photos,races,rss,www
+Environment=EXTRA_DOMAINS=frcwild.zone,www.frcwild.zone,2026.wildrank.app,test.wildrank.app,docs.wildstang.dev,zone.wildstang.dev
+
+PublishPort=8443:443
+
+Volume=%h/config/%N:/config:Z
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

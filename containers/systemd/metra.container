@@ -1,0 +1,18 @@
+[Unit]
+Description=Next Metra Server
+
+[Container]
+ContainerName=%N
+Image=ghcr.io/fruzyna/metra
+AutoUpdate=registry
+HealthCmd=curl http://127.0.0.1:80
+
+PublishPort=8001:80
+
+Volume=%h/config/%N:/config:Z
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

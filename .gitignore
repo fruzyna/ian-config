@@ -1,0 +1,15 @@
+config/ddclient/
+
+config/metra/
+
+config/reverse-proxy/*
+!config/reverse-proxy/nginx/
+config/reverse-proxy/nginx/*
+!config/reverse-proxy/nginx/site-confs/
+!config/reverse-proxy/pages/
+
+config/wildzone/
+
+config/wildrank*/user-list.csv
+
+secrets/

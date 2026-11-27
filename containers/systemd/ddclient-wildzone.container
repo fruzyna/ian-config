@@ -1,0 +1,20 @@
+[Unit]
+Description=FRCWild.Zone DDClient
+
+[Container]
+ContainerName=%N
+Image=ghcr.io/linuxserver/ddclient
+AutoUpdate=registry
+
+User=1000:1000
+UserNS=keep-id
+
+Environment=TZ=America/Chicago
+
+Volume=%h/config/ddclient/wildzone:/config:Z
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

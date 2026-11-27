@@ -1,0 +1,23 @@
+[Unit]
+Description=Miniflux Database
+
+[Container]
+ContainerName=%N
+Image=docker.io/postgres:15-alpine
+AutoUpdate=registry
+
+User=1000:1000
+UserNS=keep-id
+
+EnvironmentFile=%h/secrets/miniflux.env
+
+Network=miniflux.network
+HostName=%N
+
+Volume=%h/data/miniflux:/var/lib/postgresql/data:Z
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

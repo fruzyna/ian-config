@@ -1,0 +1,26 @@
+[Unit]
+Description=Miniflux Server
+Requires=miniflux-db.service
+After=miniflux-db.service
+
+[Container]
+ContainerName=%N
+Image=docker.io/miniflux/miniflux
+AutoUpdate=registry
+
+User=1000:1000
+UserNS=keep-id
+
+EnvironmentFile=%h/secrets/miniflux.env
+Environment=RUN_MIGRATIONS=1
+Environment=CREATE_ADMIN=1
+
+Network=miniflux.network
+HostName=%N
+PublishPort=8020:8080
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

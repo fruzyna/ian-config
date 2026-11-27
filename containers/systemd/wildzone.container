@@ -1,0 +1,20 @@
+[Unit]
+Description=WildZone Production Server
+
+[Container]
+ContainerName=%N
+Image=ghcr.io/wildstang/wildzone:0.5
+AutoUpdate=registry
+HealthCmd=curl http://127.0.0.1:80
+
+Environment=WZ_WORKERS=10
+
+PublishPort=8012:80
+
+Volume=%h/config/%N:/app/config:Z
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
